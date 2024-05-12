@@ -4,21 +4,88 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    exceptions:
+        Symfony\Component\HttpKernel\Exception\NotFoundHttpException: { code: 404 }
+        App\ProductCatalog\Domain\Aggregate\Review\Specification\Exception\ReviewTargetException: {code: 409, hidden: false}
+        App\Shared\Application\Exception\RequestBodyConvertException: { code: 400, hidden: false}
+        App\User\Application\Exception\UserNotFoundException: { code: 404, hidden: false}
+        App\Order\Application\Exception\OrderNotFoundException: { code: 404, hidden: false}
+        App\Basket\Infrastructure\Exception\BasketProductCountException: {code: 409, hidden: false}
+        App\Basket\Infrastructure\Exception\BasketTargetException: { code: 410, hidden: false }
+        App\Basket\Application\Exception\BasketEmptyException: {code: 404, hidden: false}
+        App\ProductCatalog\Application\Exception\ProductNotFoundException: { code: 404, hidden: false}
+        App\ProductCatalog\Application\Exception\ReviewNotFoundException: { code: 404, hidden: false }
+        App\ProductCatalog\Application\Exception\CategoryNotFoundException: { code: 404, hidden: false }
+        App\User\Domain\Aggregate\User\Specification\Exception\NameAlreadyExistException: { code: 409, hidden: false}
+        App\User\Domain\Aggregate\User\Specification\Exception\PhoneAlreadyExistException: { code: 409, hidden: false}
+        App\User\Domain\Aggregate\User\Specification\Exception\EmailAlreadyExistException: { code: 409, hidden: false}
+        App\Shared\Domain\Specification\Exception\EmailNotValidException: { code: 422, hidden: false}
+        App\Shared\Domain\Specification\Exception\PhoneNotValidException: { code: 422, hidden: false}
+        App\User\Domain\Aggregate\User\Specification\Exception\NameLengthException: {code: 422, hidden: false}
+        App\ProductCatalog\Domain\Aggregate\Product\Specification\Exception\ProductNameAlreadyExistException: { code: 409, hidden: false}
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            bool $isDebug: '%kernel.debug%'
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+
     App\:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
-            - '../src/Kernel.php'
+            - '../src/Shared/Infrastructure/Kernel.php'
 
+
+
+    custom_messenger.middleware:
+        class: App\Shared\Application\Messenger\CustomExceptionHandlerMiddleware
+
+    App\Shared\Application\EventHandler\ExceptionHandler\ExceptionMappingResolver:
+        arguments: [ '%exceptions%' ]
+
+    App\Shared\Application\Listener\ExceptionListener\ApiExceptionListener:
+            tags:
+                - { name: kernel.event_listener, event: kernel.exception, priority: 10 }
+
+    App\Shared\Application\Listener\ExceptionListener\ValidationExceptionListener:
+            tags:
+                - { name: kernel.event_listener, event: kernel.exception, priority: 15 }
+
+    _instanceof:
+        App\Shared\Application\Command\CommandHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: command_bus }
+
+        App\Shared\Application\Query\QueryHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: query_bus }
+
+        App\Shared\Application\Event\EventHandlerInterface:
+            tags:
+                - { name: messenger.message_handler, bus: event_bus }
+
+    get_set_method_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+        tags: [ serializer.normalizer ]
+
+
+
+
+    annotation_reader:
+        class: Doctrine\Common\Annotations\AnnotationReader
+        public: true
+
+
+    Gedmo\Tree\TreeListener:
+        tags:
+            - name: doctrine.event_subscriber
+              connection: default
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

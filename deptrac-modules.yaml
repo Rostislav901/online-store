@@ -1,0 +1,43 @@
+parameters:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*\/src\/.*\/Infrastructure\/Adapter\/.*#'
+    - '#.*\/src\/.*\/Infrastructure\/API\/.*#'
+  layers:
+    - name: Shared
+      collectors:
+        - type: directory
+          regex: /src/Shared/.*
+    - name: ProductCatalog
+      collectors:
+        - type: directory
+          regex: /src/ProductCatalog/.*
+    - name: Order
+      collectors:
+        - type: directory
+          regex: /src/Order/.*
+    - name: User
+      collectors:
+        - type: directory
+          regex: /src/User/.*
+    - name: Discount
+      collectors:
+        - type: directory
+          regex: /src/Discount/.*
+    - name: Basket
+      collectors:
+        - type: directory
+          regex: /src/Basket/.*
+
+  ruleset:
+    ProductCatalog:
+      - Shared
+    Order:
+      - Shared
+    User:
+      - Shared
+    Basket:
+      - Shared
+    Discount:
+      - Shared

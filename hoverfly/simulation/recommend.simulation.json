@@ -1,0 +1,103 @@
+{
+  "data": {
+    "pairs": [
+      {
+       "request": {
+         "path": [
+           {"matcher": "glob", "value": "/api/v1/product-count/by-user-ulid/*/recommendations"}
+         ],
+         "headers": {
+
+         }
+       },
+       "response": {
+         "status": 200,
+         "templated": true,
+         "headers": {
+           "Content-Type": ["application/json"]
+         },
+         "bodyFile": "recommend/product-count200.json"
+       }
+    },
+      {
+        "request": {
+          "path": [
+            {"matcher": "glob", "value": "/api/v1/user-data/by-user-ulid/*/recommendations"}
+          ]
+        },
+        "response": {
+            "status": 200,
+            "templated": true,
+            "headers": {
+              "Content-Type": ["application/json"]
+            },
+            "bodyFile": "recommend/user-data200.json"
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {"matcher": "glob", "value": "/api/v1/user-ulid/by-username/*/recommendations"}
+          ]
+        },
+        "response": {
+          "status": 200,
+          "templated": true,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "bodyFile": "recommend/user-ulid-by-name200.json"
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {"matcher": "glob", "value": "/api/v1/basket-data/recommendations"}
+          ]
+        },
+        "response": {
+          "status": 200,
+          "templated": true,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "bodyFile": "recommend/basket-data200.json"
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {"matcher": "glob", "value": "/api/v1/product-data/by-ulid/*/recommendations"}
+          ]
+        },
+        "response": {
+          "status": 200,
+          "templated": true,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "bodyFile": "recommend/product-data-by-ulid200.json"
+        }
+      },
+      {
+        "request": {
+          "path": [
+            {"matcher": "glob", "value": "/api/v1/product-data-basket/by-ulid/*/recommendations"}
+          ]
+        },
+        "response": {
+          "status": 200,
+          "templated": true,
+          "headers": {
+            "Content-Type": ["application/json"]
+          },
+          "bodyFile": "recommend/product-data-basket-by-ulid200.json"
+        }
+      }
+
+    ],
+    "meta": {
+       "schemaVersion": "v5.1"
+    }
+  }
+}

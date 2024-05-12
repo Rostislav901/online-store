@@ -1,5 +1,44 @@
 controllers:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/Shared/Infrastructure/Controller/
+        namespace: App\Shared\Infrastructure\Controller
     type: attribute
+
+user_api_controllers:
+    resource:
+        path: ../src/User/Infrastructure/Http/Controller/
+        namespace: App\User\Infrastructure\Http\Controller
+
+    type: attribute
+
+product_api_controllers:
+    resource:
+        path: ../src/ProductCatalog/Infrastructure/Http/Controller/
+        namespace: App\ProductCatalog\Infrastructure\Http\Controller
+
+    type: attribute
+
+basket_api_controllers:
+    resource:
+        path: ../src/Basket/Infrastructure/Http/Controller/
+        namespace: App\Basket\Infrastructure\Http\Controller
+
+    type: attribute
+
+order_api_controllers:
+    resource:
+        path: ../src/Order/Infrastructure/Http/Controller/
+        namespace: App\Order\Infrastructure\Http\Controller
+
+    type: attribute
+
+
+kernel:
+    resource: ../src/Shared/Infrastructure/Kernel.php
+    type: annotation
+
+api_refresh_token:
+    path: /api/v1/auth/token/refresh
+
+api_login_check:
+    path: /api/v1/store/login
