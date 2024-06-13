@@ -7,7 +7,7 @@ use App\User\Domain\Aggregate\User\Specification\Interface\UserPhoneNumberSpecif
 use JetBrains\PhpStorm\Immutable;
 
 #[Immutable]
-final class UserPhoneNumber extends PhoneNumber
+class UserPhoneNumber extends PhoneNumber
 {
     public function __construct(
         string $phone,

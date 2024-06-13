@@ -7,7 +7,7 @@ use App\User\Domain\Aggregate\User\Specification\Interface\UserEmailSpecificatio
 use JetBrains\PhpStorm\Immutable;
 
 #[Immutable]
-final class UserEmail extends Email
+class UserEmail extends Email
 {
     public function __construct(string $email, UserEmailSpecificationInterface $emailSpecification)
     {

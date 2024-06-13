@@ -10,6 +10,6 @@ class UserDTOTransformer
     {
         return new UserResponseDTO(
             name: $entity->getName()->getName(),
-            registrationDate: $entity->getCreatedAt()->getTimestamp(), );
+            registrationDate: $entity->getCreatedAt()->getTimestamp());
     }
 }

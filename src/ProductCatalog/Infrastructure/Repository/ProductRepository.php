@@ -67,12 +67,12 @@ class ProductRepository extends ServiceEntityRepository implements ProductReposi
         return null !== $this->findOneBy(['name' => $name, 'user_ulid.ulid' => $user_ulid]);
     }
 
-    public function findProductByName(string $name): Product
-    {
-        $res = $this->findOneBy(['name' => $name]);
-
-        return null !== $res ? $res : throw new ProductNotFoundException();
-    }
+//    public function findProductByName(string $name): Product
+//    {
+//        $res = $this->findOneBy(['name' => $name]);
+//
+//        return null !== $res ? $res : throw new ProductNotFoundException();
+//    }
 
     public function getEM(): EntityManagerInterface
     {

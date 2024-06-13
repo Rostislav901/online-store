@@ -1,7 +1,6 @@
 <?php
 
 namespace App\User\Application\DTO;
-
 class UserResponseDTO
 {
     public string $name;

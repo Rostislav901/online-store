@@ -159,6 +159,7 @@
       <path value="$PROJECT_DIR$/vendor/eventsauce/message-repository-table-schema" />
       <path value="$PROJECT_DIR$/vendor/eventsauce/id-encoding" />
       <path value="$PROJECT_DIR$/vendor/eventsauce/message-repository-for-doctrine" />
+      <path value="$PROJECT_DIR$/vendor/dama/doctrine-test-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

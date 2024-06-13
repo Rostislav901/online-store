@@ -6,7 +6,7 @@ use App\User\Domain\Factory\UserFactory;
 use App\User\Domain\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-final class UserMaker
+class UserMaker
 {
     public function __construct(private readonly UserFactory $userFactory, private readonly UserRepositoryInterface $userRepository)
     {

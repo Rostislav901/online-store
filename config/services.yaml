@@ -65,9 +65,7 @@ services:
             tags:
                 - { name: messenger.message_handler, bus: query_bus }
 
-        App\Shared\Application\Event\EventHandlerInterface:
-            tags:
-                - { name: messenger.message_handler, bus: event_bus }
+
 
     get_set_method_normalizer:
         class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer

@@ -1,0 +1,17 @@
+
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    container_name: test-store
+    restart: always
+    shm_size: 128mb
+
+    environment:
+      POSTGRES_DB:  "test-store_test"
+      POSTGRES_USER: "user"
+      POSTGRES_PASSWORD: "password"
+
+    ports:
+      - "5433:5432"

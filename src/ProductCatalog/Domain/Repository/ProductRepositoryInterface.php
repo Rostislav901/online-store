@@ -30,7 +30,6 @@ interface ProductRepositoryInterface
      */
     public function findProductBySearch(string $search): array;
 
-    public function findProductByName(string $name): Product;
 
     public function existByNameAndUserUlid(string $name, string $user_ulid): bool;
 
